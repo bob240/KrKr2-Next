@@ -52,6 +52,9 @@ void krkr_GetSurfaceDimensions(uint32_t*, uint32_t*);
 
 int TVPDrawSceneOnce(int interval);
 
+extern "C" void TVPRegisterKrkrGLESPluginAnchor();
+extern "C" void TVPRegisterKrkrLive2DPluginAnchor();
+
 struct engine_handle_s {
   std::recursive_mutex mutex;
   std::string last_error;
@@ -191,6 +194,11 @@ void InstallCrashSignalHandlers() {
   signal(SIGABRT, CrashSignalHandler);
   signal(SIGBUS,  CrashSignalHandler);
   signal(SIGFPE,  CrashSignalHandler);
+}
+
+void EnsureInternalPluginAnchorsLinked() {
+  TVPRegisterKrkrGLESPluginAnchor();
+  TVPRegisterKrkrLive2DPluginAnchor();
 }
 
 void EnsureRuntimeLoggersInitialized() {
@@ -497,6 +505,7 @@ engine_result_t OpenGameCore(engine_handle_t handle,
   }
 
   EnsureRuntimeLoggersInitialized();
+  EnsureInternalPluginAnchorsLinked();
   // Cache options set via engine_set_option() are already stored in
   // TVPEarlySetOptions and will be merged during TVPSystemInit().
   // Do NOT call TVPGetCommandLine() here — it triggers
@@ -684,6 +693,7 @@ engine_result_t engine_create(const engine_create_desc_t* desc,
   }
 
   EnsureRuntimeLoggersInitialized();
+  EnsureInternalPluginAnchorsLinked();
   TVPHostSuppressProcessExit = true;
 
   auto* impl = new (std::nothrow) engine_handle_s();
