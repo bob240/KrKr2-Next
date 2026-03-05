@@ -170,5 +170,18 @@
   "launchGame": "Launch Game",
   "copiedToClipboard": "Copied to clipboard",
   "gameFormat": "Format",
-  "gamePath": "Path"
+  "gamePath": "Path",
+
+  "scrapeMetadata": "Scrape info",
+  "scrapeMetadataDialogTitle": "Scrape info",
+  "scrapeMetadataSearchHint": "Enter game name to search",
+  "scrapeMetadataSearch": "Search",
+  "scrapeMetadataSelectTitle": "Select matching game",
+  "scrapeMetadataNoResults": "No matching games. Try another keyword.",
+  "scrapeMetadataConfirm": "Confirm",
+  "scrapeMetadataSuccess": "Name and cover updated.",
+  "scrapeMetadataCoverFailed": "Name updated. Cover failed; you can set it manually.",
+  "scrapeMetadataEnterName": "Please enter a game name.",
+  "scrapeMetadataSourceError": "Source unavailable. Try again later.",
+  "scrapeMetadataSelectOne": "Please select a game."
 }

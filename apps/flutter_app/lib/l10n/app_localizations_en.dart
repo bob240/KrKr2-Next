@@ -364,4 +364,43 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get gamePath => 'Path';
+
+  @override
+  String get scrapeMetadata => 'Scrape info';
+
+  @override
+  String get scrapeMetadataDialogTitle => 'Scrape info';
+
+  @override
+  String get scrapeMetadataSearchHint => 'Enter game name to search';
+
+  @override
+  String get scrapeMetadataSearch => 'Search';
+
+  @override
+  String get scrapeMetadataSelectTitle => 'Select matching game';
+
+  @override
+  String get scrapeMetadataNoResults =>
+      'No matching games. Try another keyword.';
+
+  @override
+  String get scrapeMetadataConfirm => 'Confirm';
+
+  @override
+  String get scrapeMetadataSuccess => 'Name and cover updated.';
+
+  @override
+  String get scrapeMetadataCoverFailed =>
+      'Name updated. Cover failed; you can set it manually.';
+
+  @override
+  String get scrapeMetadataEnterName => 'Please enter a game name.';
+
+  @override
+  String get scrapeMetadataSourceError =>
+      'Source unavailable. Try again later.';
+
+  @override
+  String get scrapeMetadataSelectOne => 'Please select a game.';
 }

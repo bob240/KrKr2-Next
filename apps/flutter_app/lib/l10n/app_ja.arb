@@ -130,5 +130,18 @@
   "launchGame": "ゲームを開始",
   "copiedToClipboard": "クリップボードにコピーしました",
   "gameFormat": "フォーマット",
-  "gamePath": "パス"
+  "gamePath": "パス",
+
+  "scrapeMetadata": "情報を取得",
+  "scrapeMetadataDialogTitle": "情報を取得",
+  "scrapeMetadataSearchHint": "ゲーム名を入力して検索",
+  "scrapeMetadataSearch": "検索",
+  "scrapeMetadataSelectTitle": "一致する作品を選択",
+  "scrapeMetadataNoResults": "一致する作品がありません。別のキーワードをお試しください。",
+  "scrapeMetadataConfirm": "確定",
+  "scrapeMetadataSuccess": "名前とカバーを更新しました。",
+  "scrapeMetadataCoverFailed": "名前を更新しました。カバーの取得に失敗しました。手動で設定できます。",
+  "scrapeMetadataEnterName": "ゲーム名を入力してください。",
+  "scrapeMetadataSourceError": "データソースが利用できません。しばらくしてから再試行してください。",
+  "scrapeMetadataSelectOne": "作品を選択してください。"
 }

@@ -353,4 +353,40 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get gamePath => '路径';
+
+  @override
+  String get scrapeMetadata => '刮削信息';
+
+  @override
+  String get scrapeMetadataDialogTitle => '刮削信息';
+
+  @override
+  String get scrapeMetadataSearchHint => '输入游戏名称搜索';
+
+  @override
+  String get scrapeMetadataSearch => '搜索';
+
+  @override
+  String get scrapeMetadataSelectTitle => '选择匹配作品';
+
+  @override
+  String get scrapeMetadataNoResults => '未找到匹配作品，请尝试其他关键词。';
+
+  @override
+  String get scrapeMetadataConfirm => '确认';
+
+  @override
+  String get scrapeMetadataSuccess => '已更新名称与封面。';
+
+  @override
+  String get scrapeMetadataCoverFailed => '名称已更新，封面获取失败可手动设置。';
+
+  @override
+  String get scrapeMetadataEnterName => '请输入游戏名称。';
+
+  @override
+  String get scrapeMetadataSourceError => '数据源暂时不可用，请稍后重试。';
+
+  @override
+  String get scrapeMetadataSelectOne => '请选择一项作品。';
 }

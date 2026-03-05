@@ -8,8 +8,11 @@ import 'package:path_provider/path_provider.dart';
 
 import '../l10n/app_localizations.dart';
 import '../models/game_info.dart';
+import '../models/game_metadata_candidate.dart';
 import '../services/game_manager.dart';
+import '../services/game_metadata_scraper.dart';
 import '../utils/xp3_utils.dart';
+import 'scrape_select_page.dart';
 
 class GameDetailResult {
   final bool needsRefresh;
@@ -39,6 +42,7 @@ class GameDetailPage extends StatefulWidget {
 
 class _GameDetailPageState extends State<GameDetailPage> {
   bool _changed = false;
+  final GameMetadataScraper _scraper = GameMetadataScraper();
 
   GameInfo get game => widget.game;
   GameManager get gm => widget.gameManager;
@@ -156,6 +160,77 @@ class _GameDetailPageState extends State<GameDetailPage> {
       await gm.renameGame(game.path, newName);
       _changed = true;
       if (mounted) setState(() {});
+    }
+  }
+
+  Future<void> _openScrape() async {
+    final l10n = AppLocalizations.of(context)!;
+
+    final keyword = await showDialog<String>(
+      context: context,
+      builder: (ctx) => _ScrapeSearchDialog(
+        l10n: l10n,
+        initialKeyword: game.displayTitle,
+      ),
+    );
+    if (keyword == null || !mounted) return;
+    final trimmed = keyword.trim();
+    if (trimmed.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.scrapeMetadataEnterName)),
+      );
+      return;
+    }
+
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => Center(
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: 16),
+                Text(l10n.scrapeMetadataSearch),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    List<GameMetadataCandidate> candidates;
+    try {
+      candidates = await _scraper.search(trimmed);
+    } catch (_) {
+      if (!mounted) return;
+      Navigator.of(context).pop(); // close loading dialog
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.scrapeMetadataSourceError)),
+      );
+      return;
+    }
+
+    if (!mounted) return;
+    Navigator.of(context).pop(); // close loading dialog
+    if (!mounted) return;
+    final applied = await Navigator.of(context).push<bool>(
+      MaterialPageRoute<bool>(
+        builder: (ctx) => ScrapeSelectPage(
+          candidates: candidates,
+          game: game,
+          gameManager: gm,
+          scraper: _scraper,
+        ),
+      ),
+    );
+    if (applied == true && mounted) {
+      _changed = true;
+      setState(() {});
     }
   }
 
@@ -496,6 +571,13 @@ class _GameDetailPageState extends State<GameDetailPage> {
             ),
             const Divider(height: 1, indent: 56),
             ListTile(
+              leading: const Icon(Icons.cloud_download_outlined),
+              title: Text(l10n.scrapeMetadata),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: _openScrape,
+            ),
+            const Divider(height: 1, indent: 56),
+            ListTile(
               leading: Icon(_isXp3 ? Icons.unarchive_outlined : Icons.archive_outlined),
               title: Text(_isXp3 ? l10n.unpackXp3 : l10n.packXp3),
               trailing: const Icon(Icons.chevron_right),
@@ -532,5 +614,63 @@ class _GameDetailPageState extends State<GameDetailPage> {
     if (diff.inDays < 1) return l10n.hoursAgo(diff.inHours);
     if (diff.inDays < 7) return l10n.daysAgo(diff.inDays);
     return '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+  }
+}
+
+/// Step 1 dialog: enter game name and search. Owns its TextEditingController
+/// so it is disposed when the dialog is disposed.
+class _ScrapeSearchDialog extends StatefulWidget {
+  const _ScrapeSearchDialog({
+    required this.l10n,
+    required this.initialKeyword,
+  });
+
+  final AppLocalizations l10n;
+  final String initialKeyword;
+
+  @override
+  State<_ScrapeSearchDialog> createState() => _ScrapeSearchDialogState();
+}
+
+class _ScrapeSearchDialogState extends State<_ScrapeSearchDialog> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: widget.initialKeyword);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = widget.l10n;
+    return AlertDialog(
+      title: Text(l10n.scrapeMetadataDialogTitle),
+      content: TextField(
+        controller: _controller,
+        autofocus: true,
+        decoration: InputDecoration(
+          border: const OutlineInputBorder(),
+          hintText: l10n.scrapeMetadataSearchHint,
+        ),
+        onSubmitted: (value) => Navigator.of(context).pop(value),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(l10n.cancel),
+        ),
+        FilledButton(
+          onPressed: () => Navigator.of(context).pop(_controller.text),
+          child: Text(l10n.scrapeMetadataSearch),
+        ),
+      ],
+    );
   }
 }

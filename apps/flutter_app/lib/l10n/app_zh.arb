@@ -130,5 +130,18 @@
   "launchGame": "启动游戏",
   "copiedToClipboard": "已复制到剪贴板",
   "gameFormat": "格式",
-  "gamePath": "路径"
+  "gamePath": "路径",
+
+  "scrapeMetadata": "刮削信息",
+  "scrapeMetadataDialogTitle": "刮削信息",
+  "scrapeMetadataSearchHint": "输入游戏名称搜索",
+  "scrapeMetadataSearch": "搜索",
+  "scrapeMetadataSelectTitle": "选择匹配作品",
+  "scrapeMetadataNoResults": "未找到匹配作品，请尝试其他关键词。",
+  "scrapeMetadataConfirm": "确认",
+  "scrapeMetadataSuccess": "已更新名称与封面。",
+  "scrapeMetadataCoverFailed": "名称已更新，封面获取失败可手动设置。",
+  "scrapeMetadataEnterName": "请输入游戏名称。",
+  "scrapeMetadataSourceError": "数据源暂时不可用，请稍后重试。",
+  "scrapeMetadataSelectOne": "请选择一项作品。"
 }

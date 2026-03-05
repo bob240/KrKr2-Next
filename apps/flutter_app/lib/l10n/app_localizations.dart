@@ -753,6 +753,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Path'**
   String get gamePath;
+
+  /// No description provided for @scrapeMetadata.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrape info'**
+  String get scrapeMetadata;
+
+  /// No description provided for @scrapeMetadataDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Scrape info'**
+  String get scrapeMetadataDialogTitle;
+
+  /// No description provided for @scrapeMetadataSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter game name to search'**
+  String get scrapeMetadataSearchHint;
+
+  /// No description provided for @scrapeMetadataSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get scrapeMetadataSearch;
+
+  /// No description provided for @scrapeMetadataSelectTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select matching game'**
+  String get scrapeMetadataSelectTitle;
+
+  /// No description provided for @scrapeMetadataNoResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No matching games. Try another keyword.'**
+  String get scrapeMetadataNoResults;
+
+  /// No description provided for @scrapeMetadataConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get scrapeMetadataConfirm;
+
+  /// No description provided for @scrapeMetadataSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Name and cover updated.'**
+  String get scrapeMetadataSuccess;
+
+  /// No description provided for @scrapeMetadataCoverFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Name updated. Cover failed; you can set it manually.'**
+  String get scrapeMetadataCoverFailed;
+
+  /// No description provided for @scrapeMetadataEnterName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a game name.'**
+  String get scrapeMetadataEnterName;
+
+  /// No description provided for @scrapeMetadataSourceError.
+  ///
+  /// In en, this message translates to:
+  /// **'Source unavailable. Try again later.'**
+  String get scrapeMetadataSourceError;
+
+  /// No description provided for @scrapeMetadataSelectOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a game.'**
+  String get scrapeMetadataSelectOne;
 }
 
 class _AppLocalizationsDelegate

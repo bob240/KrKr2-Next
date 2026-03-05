@@ -355,4 +355,40 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get gamePath => 'パス';
+
+  @override
+  String get scrapeMetadata => '情報を取得';
+
+  @override
+  String get scrapeMetadataDialogTitle => '情報を取得';
+
+  @override
+  String get scrapeMetadataSearchHint => 'ゲーム名を入力して検索';
+
+  @override
+  String get scrapeMetadataSearch => '検索';
+
+  @override
+  String get scrapeMetadataSelectTitle => '一致する作品を選択';
+
+  @override
+  String get scrapeMetadataNoResults => '一致する作品がありません。別のキーワードをお試しください。';
+
+  @override
+  String get scrapeMetadataConfirm => '確定';
+
+  @override
+  String get scrapeMetadataSuccess => '名前とカバーを更新しました。';
+
+  @override
+  String get scrapeMetadataCoverFailed => '名前を更新しました。カバーの取得に失敗しました。手動で設定できます。';
+
+  @override
+  String get scrapeMetadataEnterName => 'ゲーム名を入力してください。';
+
+  @override
+  String get scrapeMetadataSourceError => 'データソースが利用できません。しばらくしてから再試行してください。';
+
+  @override
+  String get scrapeMetadataSelectOne => '作品を選択してください。';
 }
