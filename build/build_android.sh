@@ -46,7 +46,14 @@ if [[ -d "$PROJECT_ROOT/.devtools/flutter" ]]; then
     FLUTTER_BIN="$FLUTTER_SDK/bin/flutter"
 elif command -v flutter >/dev/null 2>&1; then
     FLUTTER_BIN="$(command -v flutter)"
-    FLUTTER_SDK="$(dirname "$(dirname "$(realpath "$FLUTTER_BIN")")")"
+    if command -v realpath >/dev/null 2>&1; then
+        RESOLVED_BIN="$(realpath "$FLUTTER_BIN")"
+    elif command -v python3 >/dev/null 2>&1; then
+        RESOLVED_BIN="$(python3 -c "import os, sys; print(os.path.realpath(sys.argv[1]))" "$FLUTTER_BIN")"
+    else
+        RESOLVED_BIN="$FLUTTER_BIN"
+    fi
+    FLUTTER_SDK="$(dirname "$(dirname "$RESOLVED_BIN")")"
 else
     echo "Error: Flutter SDK not found in .devtools and not in PATH."
     exit 1
